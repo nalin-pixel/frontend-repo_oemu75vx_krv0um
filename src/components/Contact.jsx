@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { motion } from 'framer-motion'
 
 const API = import.meta.env.VITE_BACKEND_URL || ''
 
@@ -31,25 +32,25 @@ function Contact() {
 
   return (
     <section id="contact" className="max-w-4xl mx-auto px-6 py-16">
-      <h2 className="text-3xl font-bold text-white mb-6">Book a Free Trial</h2>
-      <p className="text-slate-300 mb-8">Tell us a bit about yourself and which program you’re interested in. We’ll reach out to confirm a time.</p>
+      <motion.h2 initial={{opacity:0,y:8}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{duration:0.5}} className="text-3xl font-bold text-white mb-6">Book a Free Trial</motion.h2>
+      <motion.p initial={{opacity:0,y:8}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{duration:0.5, delay:0.1}} className="text-slate-300 mb-8">Tell us a bit about yourself and which program you’re interested in. We’ll reach out to confirm a time.</motion.p>
 
-      <form onSubmit={handleSubmit} className="grid md:grid-cols-2 gap-4 bg-slate-900/60 border border-slate-800 p-6 rounded-2xl">
+      <motion.form onSubmit={handleSubmit} initial={{opacity:0}} whileInView={{opacity:1}} viewport={{once:true}} transition={{duration:0.6}} className="grid md:grid-cols-2 gap-4 bg-slate-900/60 border border-slate-800 p-6 rounded-2xl">
         <div>
           <label className="block text-sm text-slate-300 mb-1">Name</label>
-          <input name="name" value={form.name} onChange={handleChange} required className="w-full rounded-lg bg-slate-800 border border-slate-700 p-3 text-white" />
+          <input name="name" value={form.name} onChange={handleChange} required className="w-full rounded-lg bg-slate-800 border border-slate-700 p-3 text-white focus:outline-none focus:ring-2 focus:ring-red-600/50" />
         </div>
         <div>
           <label className="block text-sm text-slate-300 mb-1">Email</label>
-          <input type="email" name="email" value={form.email} onChange={handleChange} required className="w-full rounded-lg bg-slate-800 border border-slate-700 p-3 text-white" />
+          <input type="email" name="email" value={form.email} onChange={handleChange} required className="w-full rounded-lg bg-slate-800 border border-slate-700 p-3 text-white focus:outline-none focus:ring-2 focus:ring-red-600/50" />
         </div>
         <div>
           <label className="block text-sm text-slate-300 mb-1">Phone</label>
-          <input name="phone" value={form.phone} onChange={handleChange} className="w-full rounded-lg bg-slate-800 border border-slate-700 p-3 text-white" />
+          <input name="phone" value={form.phone} onChange={handleChange} className="w-full rounded-lg bg-slate-800 border border-slate-700 p-3 text-white focus:outline-none focus:ring-2 focus:ring-red-600/50" />
         </div>
         <div>
           <label className="block text-sm text-slate-300 mb-1">Program</label>
-          <select name="program" value={form.program} onChange={handleChange} className="w-full rounded-lg bg-slate-800 border border-slate-700 p-3 text-white">
+          <select name="program" value={form.program} onChange={handleChange} className="w-full rounded-lg bg-slate-800 border border-slate-700 p-3 text-white focus:outline-none focus:ring-2 focus:ring-red-600/50">
             <option value="">Select a program</option>
             <option>Kickboxing</option>
             <option>Karate</option>
@@ -58,14 +59,14 @@ function Contact() {
         </div>
         <div className="md:col-span-2">
           <label className="block text-sm text-slate-300 mb-1">Message</label>
-          <textarea name="message" value={form.message} onChange={handleChange} rows="4" className="w-full rounded-lg bg-slate-800 border border-slate-700 p-3 text-white" />
+          <textarea name="message" value={form.message} onChange={handleChange} rows="4" className="w-full rounded-lg bg-slate-800 border border-slate-700 p-3 text-white focus:outline-none focus:ring-2 focus:ring-red-600/50" />
         </div>
         <div className="md:col-span-2 flex items-center gap-3">
-          <button disabled={status.loading} className="px-5 py-3 rounded-xl bg-red-600 hover:bg-red-500 text-white font-semibold disabled:opacity-60">{status.loading ? 'Sending...' : 'Send Request'}</button>
+          <button disabled={status.loading} className="px-5 py-3 rounded-xl bg-red-600 hover:bg-red-500 text-white font-semibold disabled:opacity-60 transition-transform active:scale-95">{status.loading ? 'Sending...' : 'Send Request'}</button>
           {status.success && <span className="text-green-400 text-sm">{status.success}</span>}
           {status.error && <span className="text-red-400 text-sm">{status.error}</span>}
         </div>
-      </form>
+      </motion.form>
     </section>
   )
 }
